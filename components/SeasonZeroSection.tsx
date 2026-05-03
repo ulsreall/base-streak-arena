@@ -1,4 +1,5 @@
 import { CheckCircle2, ShieldCheck, Trophy } from "lucide-react";
+import { SeasonZeroStats } from "@/components/SeasonZeroStats";
 
 export function SeasonZeroSection() {
   return (
@@ -15,6 +16,8 @@ export function SeasonZeroSection() {
           2,000 OG badges only
         </div>
       </div>
+
+      <SeasonZeroStats />
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">

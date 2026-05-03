@@ -107,7 +107,7 @@ export function DailyArena() {
     setMessage(`Check-in locked 🔥 +${reward} XP. Streak lu sekarang Day ${newStreak}.`);
   }
 
-  const shareText = `I just hit Day ${Math.max(player.streak, 1)} streak on Base Streak Arena 🔵🔥\n\n${player.xp} XP earned in Season 0.\nBase Arena OG is live on Base.\n\nNo guaranteed rewards — just proof you were early.`;
+  const shareText = `Day ${Math.max(player.streak, 1)} streak on Base Streak Arena 🔵🔥\n\n${player.xp} XP earned in Season 0.\nI am building my streak with no daily gas.\n\nNo guaranteed rewards — just proof you were early.`;
   const shareUrl = `https://farcaster.xyz/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(APP_URL)}`;
 
   return (

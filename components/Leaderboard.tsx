@@ -65,7 +65,7 @@ export function Leaderboard() {
       </div>
 
       <div className="mb-4 rounded-2xl border border-blue-300/15 bg-blue-300/10 p-4 text-sm leading-6 text-slate-300">
-        Launch MVP: skor disimpan lokal dulu biar user bisa main tanpa login/database. Supabase leaderboard global bisa masuk next build setelah soft launch stabil.
+        Launch MVP: skor disimpan lokal dulu biar user bisa main tanpa login/database. Supabase global sudah disiapkan sebagai next build: wallet, Farcaster user, XP, streak, check-ins.
       </div>
 
       <div className="space-y-3">
