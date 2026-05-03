@@ -7,7 +7,7 @@ export const BASE_ARENA_BADGE_MAX_SUPPLY = 2000;
 
 // After deploying contracts/BaseArenaBadge.sol on Base Mainnet,
 // paste the deployed address here, then redeploy the frontend.
-export const BASE_ARENA_BADGE_ADDRESS = "" as `0x${string}` | "";
+export const BASE_ARENA_BADGE_ADDRESS = "0x7EC9A34C9d9d309D3Be2F261897A43297B00c2dC" as const;
 
 export const baseArenaBadgeAbi = parseAbi([
   "function claimOGBadge() external returns (uint256 tokenId)",
