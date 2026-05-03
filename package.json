@@ -1,1 +1,34 @@
-{"scripts":{"dev":"next dev","build":"next build","start":"next start","lint":"next lint"},"dependencies":{"@farcaster/miniapp-sdk":"latest","@vercel/analytics":"latest","lucide-react":"latest","next":"latest","react":"latest","react-dom":"latest","viem":"latest","wagmi":"latest"},"devDependencies":{"@tailwindcss/postcss":"latest","@types/node":"latest","@types/react":"latest","@types/react-dom":"latest","tailwindcss":"latest","typescript":"latest"}}
+{
+  "name": "base-streak-arena",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@farcaster/miniapp-sdk": "^0.2.0",
+    "@vercel/analytics": "^1.5.0",
+    "lucide-react": "^0.468.0",
+    "next": "15.5.7",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "viem": "^2.22.11",
+    "wagmi": "^2.14.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^20.17.14",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.3"
+  }
+}
