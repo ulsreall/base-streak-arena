@@ -7,6 +7,7 @@ This build adds the first real onchain action: **Base Arena OG Badge** claim on 
 - `contracts/BaseArenaBadge.sol`
   - Minimal soulbound ERC721-style OG badge
   - Free claim, user only pays gas
+  - Max supply: 2,000 badges
   - One claim per wallet
   - Emits `OGBadgeClaimed`
 - `components/OnchainBadgeClaim.tsx`
@@ -19,6 +20,7 @@ This build adds the first real onchain action: **Base Arena OG Badge** claim on 
   - Base Mainnet config
   - Contract ABI
   - Placeholder contract address
+  - Max supply constant for frontend display: 2,000
 - `public/nft/base-arena-og.png`
   - 1:1 preview image for the Base Arena OG NFT
 - `app/metadata/og/[tokenId]/route.ts`

@@ -12,7 +12,7 @@ export async function GET(_request: Request, context: RouteContext) {
     {
       name: `Base Arena OG #${cleanTokenId}`,
       description:
-        "A soulbound early-player badge for Base Streak Arena — the Farcaster Mini App for daily Base streaks, XP, leaderboard status, and onchain OG proof.",
+        "A limited soulbound early-player badge for Base Streak Arena — only 2,000 Base Arena OG badges for Season 0 players.",
       image: `${APP_URL}/nft/base-arena-og.png`,
       external_url: APP_URL,
       attributes: [
@@ -21,7 +21,8 @@ export async function GET(_request: Request, context: RouteContext) {
         { trait_type: "Chain", value: "Base Mainnet" },
         { trait_type: "Transferability", value: "Soulbound" },
         { trait_type: "Season", value: "Season 0" },
-        { trait_type: "Status", value: "Early Player" }
+        { trait_type: "Status", value: "Early Player" },
+        { trait_type: "Max Supply", value: "2000" }
       ]
     },
     {

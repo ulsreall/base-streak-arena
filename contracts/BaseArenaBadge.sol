@@ -10,6 +10,7 @@ contract BaseArenaBadge {
 
     address public owner;
     uint256 public totalSupply;
+    uint256 public constant MAX_SUPPLY = 2000;
     string private baseTokenURI;
 
     mapping(address => bool) public hasClaimedOG;
@@ -26,6 +27,7 @@ contract BaseArenaBadge {
     error Soulbound();
     error ZeroAddress();
     error TokenNotFound();
+    error MaxSupplyReached();
 
     modifier onlyOwner() {
         if (msg.sender != owner) revert NotOwner();
@@ -40,6 +42,7 @@ contract BaseArenaBadge {
 
     function claimOGBadge() external returns (uint256 tokenId) {
         if (hasClaimedOG[msg.sender]) revert AlreadyClaimed();
+        if (totalSupply >= MAX_SUPPLY) revert MaxSupplyReached();
 
         tokenId = totalSupply + 1;
         totalSupply = tokenId;
