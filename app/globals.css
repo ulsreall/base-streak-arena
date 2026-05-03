@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #020617;
+  --foreground: #eef5ff;
+  --base-blue: #0052ff;
+  --arena-cyan: #22d3ee;
+  --arena-violet: #8b5cf6;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0, 82, 255, 0.35), transparent 34%),
+    radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.24), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(34, 211, 238, 0.16), transparent 34%),
+    var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.arena-card {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.56));
+  box-shadow: 0 24px 80px rgba(0, 82, 255, 0.15);
+  backdrop-filter: blur(18px);
+}
+
+.neon-text {
+  text-shadow: 0 0 24px rgba(34, 211, 238, 0.55);
+}
+
+.grid-glow {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
