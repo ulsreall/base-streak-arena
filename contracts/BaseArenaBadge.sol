@@ -2,8 +2,8 @@
 pragma solidity ^0.8.24;
 
 /// @title BaseArenaBadge
-/// @notice Minimal non-transferable ERC721-style OG badge for Base Streak Arena.
-/// @dev Deploy on Base Mainnet after reviewing constructor args. Free claim; users only pay gas.
+/// @notice Minimal non-transferable ERC721-style paid OG badge for Base Streak Arena.
+/// @dev Deploy on Base Mainnet after reviewing constructor args. Mint fee is fixed in ETH, approximately $0.50 depending on ETH/USD.
 contract BaseArenaBadge {
     string public name = "Base Arena OG";
     string public symbol = "BSAOG";
@@ -11,6 +11,7 @@ contract BaseArenaBadge {
     address public owner;
     uint256 public totalSupply;
     uint256 public constant MAX_SUPPLY = 2000;
+    uint256 public constant MINT_PRICE = 0.0002 ether;
     string private baseTokenURI;
 
     mapping(address => bool) public hasClaimedOG;
@@ -21,6 +22,7 @@ contract BaseArenaBadge {
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     event OGBadgeClaimed(address indexed player, uint256 indexed tokenId, uint256 timestamp);
     event BaseTokenURIUpdated(string newBaseTokenURI);
+    event Withdrawn(address indexed to, uint256 amount);
 
     error NotOwner();
     error AlreadyClaimed();
@@ -28,6 +30,8 @@ contract BaseArenaBadge {
     error ZeroAddress();
     error TokenNotFound();
     error MaxSupplyReached();
+    error InsufficientMintFee();
+    error WithdrawFailed();
 
     modifier onlyOwner() {
         if (msg.sender != owner) revert NotOwner();
@@ -40,9 +44,10 @@ contract BaseArenaBadge {
         emit OwnershipTransferred(address(0), msg.sender);
     }
 
-    function claimOGBadge() external returns (uint256 tokenId) {
+    function claimOGBadge() external payable returns (uint256 tokenId) {
         if (hasClaimedOG[msg.sender]) revert AlreadyClaimed();
         if (totalSupply >= MAX_SUPPLY) revert MaxSupplyReached();
+        if (msg.value < MINT_PRICE) revert InsufficientMintFee();
 
         tokenId = totalSupply + 1;
         totalSupply = tokenId;
@@ -73,6 +78,14 @@ contract BaseArenaBadge {
     function setBaseTokenURI(string calldata newBaseTokenURI) external onlyOwner {
         baseTokenURI = newBaseTokenURI;
         emit BaseTokenURIUpdated(newBaseTokenURI);
+    }
+
+    function withdraw(address payable to) external onlyOwner {
+        if (to == address(0)) revert ZeroAddress();
+        uint256 amount = address(this).balance;
+        (bool ok, ) = to.call{value: amount}("");
+        if (!ok) revert WithdrawFailed();
+        emit Withdrawn(to, amount);
     }
 
     function transferOwnership(address newOwner) external onlyOwner {

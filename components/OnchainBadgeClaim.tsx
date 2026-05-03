@@ -7,6 +7,8 @@ import { base } from "viem/chains";
 import {
   BASE_ARENA_BADGE_ADDRESS,
   BASE_ARENA_BADGE_MAX_SUPPLY,
+  BASE_ARENA_BADGE_MINT_PRICE_LABEL,
+  BASE_ARENA_BADGE_MINT_PRICE_WEI_HEX,
   BASE_BLOCK_EXPLORER,
   BASE_CHAIN_ID_HEX,
   baseArenaBadgeAbi,
@@ -126,7 +128,7 @@ export function OnchainBadgeClaim() {
           ? "All 2,000 Base Arena OG badges have been claimed."
           : claimed
             ? "This wallet already claimed Base Arena OG."
-            : "Wallet ready. You can claim Base Arena OG."
+            : `Wallet ready. Mint price: ${BASE_ARENA_BADGE_MINT_PRICE_LABEL} + Base gas.`
       );
     } catch (error) {
       setState("error");
@@ -143,7 +145,7 @@ export function OnchainBadgeClaim() {
 
     try {
       setState("claiming");
-      setMessage("Confirm the claim transaction in your wallet...");
+      setMessage(`Confirm paid mint in your wallet: ${BASE_ARENA_BADGE_MINT_PRICE_LABEL} + Base gas.`);
       const provider = await getMiniAppProvider();
       if (!provider) throw new Error("Wallet provider not found.");
       const [connected] = (await provider.request({ method: "eth_requestAccounts" })) as `0x${string}`[];
@@ -153,7 +155,7 @@ export function OnchainBadgeClaim() {
       const data = encodeFunctionData({ abi: baseArenaBadgeAbi, functionName: "claimOGBadge" });
       const hash = (await provider.request({
         method: "eth_sendTransaction",
-        params: [{ from: connected, to: contractAddress!, data }],
+        params: [{ from: connected, to: contractAddress!, data, value: BASE_ARENA_BADGE_MINT_PRICE_WEI_HEX }],
       })) as `0x${string}`;
 
       setTxHash(hash);
@@ -166,7 +168,8 @@ export function OnchainBadgeClaim() {
       fallbackPublicClient.waitForTransactionReceipt({ hash }).catch(() => undefined);
     } catch (error) {
       setState("error");
-      setMessage(error instanceof Error ? error.message : "Claim transaction failed or was rejected.");
+      const errorMessage = error instanceof Error ? error.message : "Claim transaction failed or was rejected.";
+      setMessage(errorMessage.includes("InsufficientMintFee") ? "Mint fee kurang. Claim needs 0.0002 ETH + Base gas." : errorMessage);
     }
   }
 
@@ -183,7 +186,7 @@ export function OnchainBadgeClaim() {
           <p className="text-xs font-black uppercase tracking-[0.26em] text-cyan-100">Onchain claim</p>
           <h3 className="mt-1 text-2xl font-black text-white">Base Arena OG Badge</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
-            Free soulbound OG badge on Base Mainnet. Limited to 2,000 early players. User only pays gas.
+            Paid soulbound OG badge on Base Mainnet. Limited to 2,000 early players. Mint fee {BASE_ARENA_BADGE_MINT_PRICE_LABEL} + Base gas.
           </p>
         </div>
       </div>
@@ -195,6 +198,10 @@ export function OnchainBadgeClaim() {
             {totalClaimed === null ? "Check wallet to load" : `${totalClaimed.toLocaleString()} / ${BASE_ARENA_BADGE_MAX_SUPPLY.toLocaleString()}`}
           </span>
         </div>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-yellow-300/15 bg-yellow-300/[0.08] px-3 py-2">
+          <span className="text-xs font-black uppercase tracking-[0.22em] text-yellow-100">Mint Fee</span>
+          <span className="text-sm font-black text-white">{BASE_ARENA_BADGE_MINT_PRICE_LABEL} + gas</span>
+        </div>
         <div className="flex flex-wrap items-center gap-2">
           <ShieldCheck className="h-4 w-4 text-emerald-200" />
           <span>{message}</span>
@@ -202,7 +209,7 @@ export function OnchainBadgeClaim() {
         {account && <p className="mt-2 text-xs text-slate-500">Connected: {shortAddress(account)}</p>}
         {!hasContract && (
           <p className="mt-2 text-xs text-yellow-100">
-            Developer note: deploy contract first, then paste address in <code>lib/baseArenaBadge.ts</code>.
+            Developer note: deploy the NEW paid contract first, then paste its address in <code>lib/baseArenaBadge.ts</code>.
           </p>
         )}
       </div>
@@ -224,7 +231,7 @@ export function OnchainBadgeClaim() {
           className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#0052ff] px-4 py-3 text-sm font-black text-white shadow-[0_0_34px_rgba(0,82,255,0.36)] transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-55"
         >
           {state === "claiming" ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle2 className="h-4 w-4" />}
-          {soldOut ? "Sold Out" : alreadyClaimed ? "OG Claimed" : "Claim OG Badge"}
+          {soldOut ? "Sold Out" : alreadyClaimed ? "OG Claimed" : "Mint OG Badge"}
         </button>
       </div>
 

@@ -1,9 +1,10 @@
-import { Flame, ShieldCheck, Trophy, Zap } from "lucide-react";
+import { Flame, ShieldCheck, Zap } from "lucide-react";
 import { ArenaButton } from "@/components/ArenaButton";
+import { DailyArena } from "@/components/DailyArena";
 import { Leaderboard } from "@/components/Leaderboard";
-import { StatCard } from "@/components/StatCard";
 import { MiniAppClient } from "@/components/MiniAppClient";
 import { OnchainBadgeClaim } from "@/components/OnchainBadgeClaim";
+import { SeasonZeroSection } from "@/components/SeasonZeroSection";
 
 export default function Home() {
   return (
@@ -55,27 +56,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div id="arena" className="arena-card rounded-[2.4rem] p-6">
-            <div className="rounded-[2rem] border border-white/10 bg-slate-950/60 p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-400">gm, player</p>
-                  <h2 className="mt-1 text-3xl font-black text-white">Arena Dashboard</h2>
-                </div>
-                <div className="rounded-2xl bg-orange-400/15 p-3 text-orange-200">
-                  <Flame className="h-6 w-6" />
-                </div>
-              </div>
-              <div className="mt-6 grid grid-cols-2 gap-3">
-                <StatCard label="Streak" value="0d" note="start today" />
-                <StatCard label="XP" value="0" note="+10 daily" />
-              </div>
-              <button className="mt-5 w-full rounded-2xl bg-[#0052ff] px-5 py-4 text-sm font-black text-white shadow-[0_0_36px_rgba(0,82,255,0.42)]">
-                CHECK IN TODAY
-              </button>
-              <p className="mt-3 text-center text-xs text-slate-500">Wallet + Farcaster integration coming in next build.</p>
-            </div>
-          </div>
+          <DailyArena />
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
@@ -98,13 +79,15 @@ export default function Home() {
                 <li>• Join during Season 0</li>
                 <li>• Connect wallet on Base Mainnet</li>
                 <li>• Claim once per wallet</li>
-                <li>• Free claim, user only pays gas</li>
+                <li>• Paid mint: approx $0.50 / 0.0002 ETH + Base gas</li>
               </ul>
             </div>
             <OnchainBadgeClaim />
           </div>
           <Leaderboard />
         </div>
+
+        <SeasonZeroSection />
 
         <footer className="pb-8 text-center text-sm text-slate-500">
           Built for Farcaster by Base Streak Arena. No guaranteed rewards. Play for status, streaks, and community benefits.

@@ -12,7 +12,7 @@ export async function GET(_request: Request, context: RouteContext) {
     {
       name: `Base Arena OG #${cleanTokenId}`,
       description:
-        "A limited soulbound early-player badge for Base Streak Arena — only 2,000 Base Arena OG badges for Season 0 players.",
+        "A limited paid soulbound early-player badge for Base Streak Arena — only 2,000 Base Arena OG badges for Season 0 players.",
       image: `${APP_URL}/nft/base-arena-og.png`,
       external_url: APP_URL,
       attributes: [
@@ -22,7 +22,9 @@ export async function GET(_request: Request, context: RouteContext) {
         { trait_type: "Transferability", value: "Soulbound" },
         { trait_type: "Season", value: "Season 0" },
         { trait_type: "Status", value: "Early Player" },
-        { trait_type: "Max Supply", value: "2000" }
+        { trait_type: "Max Supply", value: "2000" },
+        { trait_type: "Mint Fee", value: "0.0002 ETH" },
+        { trait_type: "USD Display", value: "Approx $0.50" }
       ]
     },
     {
