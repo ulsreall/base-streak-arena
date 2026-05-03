@@ -19,6 +19,10 @@ This build adds the first real onchain action: **Base Arena OG Badge** claim on 
   - Base Mainnet config
   - Contract ABI
   - Placeholder contract address
+- `public/nft/base-arena-og.png`
+  - 1:1 preview image for the Base Arena OG NFT
+- `app/metadata/og/[tokenId]/route.ts`
+  - Dynamic NFT metadata endpoint used by `tokenURI(tokenId)`
 
 ## Recommended launch flow
 
@@ -31,7 +35,19 @@ This build adds the first real onchain action: **Base Arena OG Badge** claim on 
 https://base-streak-arena.vercel.app/metadata/og/
 ```
 
-For MVP, this token URI can be updated later with `setBaseTokenURI()`.
+For MVP, this token URI points to the included metadata route. Example token #1 metadata will be:
+
+```text
+https://base-streak-arena.vercel.app/metadata/og/1
+```
+
+The metadata image is:
+
+```text
+https://base-streak-arena.vercel.app/nft/base-arena-og.png
+```
+
+You can update the base URI later with `setBaseTokenURI()` if needed.
 
 5. Copy the deployed contract address.
 6. Open `lib/baseArenaBadge.ts` and replace:
