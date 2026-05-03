@@ -1,6 +1,6 @@
 {
   "name": "base-streak-arena",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "packageManager": "npm@10.9.2",
   "engines": {
@@ -19,9 +19,7 @@
     "lucide-react": "^0.468.0",
     "next": "15.5.7",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "viem": "^2.22.11",
-    "wagmi": "^2.14.7"
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

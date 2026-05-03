@@ -2,6 +2,7 @@ import { Flame, ShieldCheck, Trophy, Zap } from "lucide-react";
 import { ArenaButton } from "@/components/ArenaButton";
 import { Leaderboard } from "@/components/Leaderboard";
 import { StatCard } from "@/components/StatCard";
+import { MiniAppClient } from "@/components/MiniAppClient";
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
               <ArenaButton href="#arena">Enter Arena</ArenaButton>
               <ArenaButton href="#badges" variant="secondary">View OG Benefit</ArenaButton>
             </div>
+            <MiniAppClient />
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
                 <p className="text-2xl font-black text-white">+10 XP</p>
