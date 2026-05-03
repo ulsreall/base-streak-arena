@@ -2,12 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { Award, CheckCircle2, ExternalLink, Loader2, PlugZap, ShieldCheck } from "lucide-react";
-import { createPublicClient, custom, encodeFunctionData, http, type EIP1193Provider } from "viem";
+import { createPublicClient, encodeFunctionData, http, type EIP1193Provider } from "viem";
 import { base } from "viem/chains";
 import {
   BASE_ARENA_BADGE_ADDRESS,
   BASE_ARENA_BADGE_MAX_SUPPLY,
-  BASE_ARENA_BADGE_MINT_PRICE_LABEL,
   BASE_ARENA_BADGE_MINT_PRICE_WEI_HEX,
   BASE_BLOCK_EXPLORER,
   BASE_CHAIN_ID_HEX,
@@ -105,16 +104,17 @@ export function OnchainBadgeClaim() {
       }
 
       setState("checking");
-      setMessage("Checking if this wallet already claimed OG...");
-      const client = createPublicClient({ chain: base, transport: custom(provider) });
+      setMessage("Checking if this wallet already minted OG...");
+      // Farcaster's wallet provider can sign/send transactions, but it may not support raw eth_call.
+      // Use a normal Base RPC public client for contract reads to avoid "provider does not support requested method" errors.
       const [claimed, supply] = await Promise.all([
-        client.readContract({
+        fallbackPublicClient.readContract({
           address: contractAddress!,
           abi: baseArenaBadgeAbi,
           functionName: "hasClaimedOG",
           args: [connected],
         }),
-        client.readContract({
+        fallbackPublicClient.readContract({
           address: contractAddress!,
           abi: baseArenaBadgeAbi,
           functionName: "totalSupply",
@@ -128,7 +128,7 @@ export function OnchainBadgeClaim() {
           ? "All 2,000 Base Arena OG badges have been claimed."
           : claimed
             ? "This wallet already claimed Base Arena OG."
-            : `Wallet ready. Mint price: ${BASE_ARENA_BADGE_MINT_PRICE_LABEL} + Base gas.`
+            : "Wallet ready. You can mint your Base Arena OG badge."
       );
     } catch (error) {
       setState("error");
@@ -145,7 +145,7 @@ export function OnchainBadgeClaim() {
 
     try {
       setState("claiming");
-      setMessage(`Confirm paid mint in your wallet: ${BASE_ARENA_BADGE_MINT_PRICE_LABEL} + Base gas.`);
+      setMessage("Confirm the mint transaction in your wallet.");
       const provider = await getMiniAppProvider();
       if (!provider) throw new Error("Wallet provider not found.");
       const [connected] = (await provider.request({ method: "eth_requestAccounts" })) as `0x${string}`[];
@@ -169,7 +169,7 @@ export function OnchainBadgeClaim() {
     } catch (error) {
       setState("error");
       const errorMessage = error instanceof Error ? error.message : "Claim transaction failed or was rejected.";
-      setMessage(errorMessage.includes("InsufficientMintFee") ? "Mint fee kurang. Claim needs 0.0002 ETH + Base gas." : errorMessage);
+      setMessage(errorMessage.includes("InsufficientMintFee") ? "ETH balance kurang untuk mint dan gas." : errorMessage);
     }
   }
 
@@ -186,7 +186,7 @@ export function OnchainBadgeClaim() {
           <p className="text-xs font-black uppercase tracking-[0.26em] text-cyan-100">Onchain claim</p>
           <h3 className="mt-1 text-2xl font-black text-white">Base Arena OG Badge</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
-            Paid soulbound OG badge on Base Mainnet. Limited to 2,000 early players. Mint fee {BASE_ARENA_BADGE_MINT_PRICE_LABEL} + Base gas.
+            Soulbound OG badge on Base Mainnet. Limited to 2,000 early players. Mint once per wallet.
           </p>
         </div>
       </div>
@@ -197,10 +197,6 @@ export function OnchainBadgeClaim() {
           <span className="text-sm font-black text-white">
             {totalClaimed === null ? "Check wallet to load" : `${totalClaimed.toLocaleString()} / ${BASE_ARENA_BADGE_MAX_SUPPLY.toLocaleString()}`}
           </span>
-        </div>
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-yellow-300/15 bg-yellow-300/[0.08] px-3 py-2">
-          <span className="text-xs font-black uppercase tracking-[0.22em] text-yellow-100">Mint Fee</span>
-          <span className="text-sm font-black text-white">{BASE_ARENA_BADGE_MINT_PRICE_LABEL} + gas</span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <ShieldCheck className="h-4 w-4 text-emerald-200" />

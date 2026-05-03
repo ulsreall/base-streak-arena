@@ -79,7 +79,7 @@ export default function Home() {
                 <li>• Join during Season 0</li>
                 <li>• Connect wallet on Base Mainnet</li>
                 <li>• Claim once per wallet</li>
-                <li>• Paid mint: approx $0.50 / 0.0002 ETH + Base gas</li>
+                <li>• Max supply: 2,000 OG badges</li>
               </ul>
             </div>
             <OnchainBadgeClaim />

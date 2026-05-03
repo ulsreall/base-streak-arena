@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 /// @title BaseArenaBadge
 /// @notice Minimal non-transferable ERC721-style paid OG badge for Base Streak Arena.
-/// @dev Deploy on Base Mainnet after reviewing constructor args. Mint fee is fixed in ETH, approximately $0.50 depending on ETH/USD.
+/// @dev Deploy on Base Mainnet after reviewing constructor args. Mint fee is fixed in ETH.
 contract BaseArenaBadge {
     string public name = "Base Arena OG";
     string public symbol = "BSAOG";
@@ -11,7 +11,7 @@ contract BaseArenaBadge {
     address public owner;
     uint256 public totalSupply;
     uint256 public constant MAX_SUPPLY = 2000;
-    uint256 public constant MINT_PRICE = 0.0002 ether;
+    uint256 public constant MINT_PRICE = 0.00015 ether;
     string private baseTokenURI;
 
     mapping(address => bool) public hasClaimedOG;
