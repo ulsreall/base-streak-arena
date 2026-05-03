@@ -4,14 +4,14 @@ import "./globals.css";
 
 const miniAppEmbed = {
   version: "1",
-  imageUrl: "https://base-streak-arena.vercel.app/og-image.png",
+  imageUrl: "https://base-streak-arena.vercel.app/og-image-v5.png",
   button: {
     title: "Enter Arena",
     action: {
       type: "launch_miniapp",
       name: "Base Streak Arena",
       url: "https://base-streak-arena.vercel.app",
-      splashImageUrl: "https://base-streak-arena.vercel.app/splash.png",
+      splashImageUrl: "https://base-streak-arena.vercel.app/splash-v5.png",
       splashBackgroundColor: "#020617",
     },
   },
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     title: "Base Streak Arena",
     description: "Build your streak. Claim your Base Arena OG status.",
     type: "website",
-    images: ["/og-image.png"],
+    images: ["/og-image-v5.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Base Streak Arena",
     description: "Build your streak. Claim your Base Arena OG status.",
-    images: ["/og-image.png"],
+    images: ["/og-image-v5.png"],
   },
   other: {
     "fc:miniapp": JSON.stringify(miniAppEmbed),

@@ -9,7 +9,7 @@ const manifest = {
     "name": "Base Streak Arena",
     "homeUrl": "https://base-streak-arena.vercel.app",
     "iconUrl": "https://base-streak-arena.vercel.app/icon.png",
-    "splashImageUrl": "https://base-streak-arena.vercel.app/splash.png",
+    "splashImageUrl": "https://base-streak-arena.vercel.app/splash-v5.png",
     "splashBackgroundColor": "#020617",
     "subtitle": "Daily Base streaks",
     "description": "Check in daily, earn XP, climb the leaderboard, and claim Base Arena OG status onchain.",
@@ -21,11 +21,11 @@ const manifest = {
       "leaderboard",
       "badges"
     ],
-    "heroImageUrl": "https://base-streak-arena.vercel.app/og-image.png",
+    "heroImageUrl": "https://base-streak-arena.vercel.app/og-image-v5.png",
     "tagline": "Build your streak",
     "ogTitle": "Base Streak Arena",
     "ogDescription": "Daily streak game on Base with XP, leaderboard, and OG status.",
-    "ogImageUrl": "https://base-streak-arena.vercel.app/og-image.png",
+    "ogImageUrl": "https://base-streak-arena.vercel.app/og-image-v5.png",
     "requiredChains": [
       "eip155:8453"
     ],

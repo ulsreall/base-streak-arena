@@ -3,6 +3,7 @@ import { ArenaButton } from "@/components/ArenaButton";
 import { Leaderboard } from "@/components/Leaderboard";
 import { StatCard } from "@/components/StatCard";
 import { MiniAppClient } from "@/components/MiniAppClient";
+import { OnchainBadgeClaim } from "@/components/OnchainBadgeClaim";
 
 export default function Home() {
   return (
@@ -95,11 +96,12 @@ export default function Home() {
               <p className="text-sm font-bold text-yellow-100">OG requirements</p>
               <ul className="mt-3 space-y-2 text-sm text-slate-300">
                 <li>• Join during Season 0</li>
-                <li>• Connect wallet</li>
-                <li>• Check in at least once</li>
-                <li>• Claim badge on Base Mainnet</li>
+                <li>• Connect wallet on Base Mainnet</li>
+                <li>• Claim once per wallet</li>
+                <li>• Free claim, user only pays gas</li>
               </ul>
             </div>
+            <OnchainBadgeClaim />
           </div>
           <Leaderboard />
         </div>
