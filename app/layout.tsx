@@ -34,6 +34,7 @@ export const metadata: Metadata = {
     images: ["/og-image-v5.png"],
   },
   other: {
+    "talentapp:project_verification": "3bac6f21603a46c0967e7000f85547a84bff80c3b89848be553299883901dde1b0fa24312d79412c489b41fac57f63ba9523bebad443c7f56e1d3256958c5525",
     "fc:miniapp": JSON.stringify(miniAppEmbed),
     "fc:frame": JSON.stringify(miniAppEmbed),
   },
